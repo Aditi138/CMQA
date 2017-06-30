@@ -1,0 +1,51 @@
+F:\Projects\TextTranslator\TextTranslator\bin\Debug\TextTranslator.exe.config
+F:\Projects\TextTranslator\TextTranslator\bin\Debug\TextTranslator.exe
+F:\Projects\TextTranslator\TextTranslator\bin\Debug\TextTranslator.pdb
+F:\Projects\TextTranslator\TextTranslator\obj\Debug\TextTranslator.exe
+F:\Projects\TextTranslator\TextTranslator\obj\Debug\TextTranslator.pdb
+F:\Projects\TextTranslator\TextTranslator\bin\Debug\System.Net.Http.Extensions.dll
+F:\Projects\TextTranslator\TextTranslator\bin\Debug\System.Net.Http.Primitives.dll
+F:\Projects\TextTranslator\TextTranslator\bin\Debug\System.Net.Http.Extensions.xml
+F:\Projects\TextTranslator\TextTranslator\bin\Debug\System.Net.Http.Primitives.xml
+F:\Projects\TextTranslator\TextTranslator\obj\Debug\TextTranslator.csproj.App.config
+F:\Projects\TextTranslator\TextTranslator\obj\Debug\TextTranslator.csprojResolveAssemblyReference.cache
+F:\Projects\TextTranslator\TextTranslator\bin\Debug\Newtonsoft.Json.dll
+F:\Projects\TextTranslator\TextTranslator\bin\Debug\rosette_api.dll
+C:\Users\adchau\Documents\Visual Studio 2013\Projects\TextTranslator\TextTranslator\bin\Debug\TextTranslator.exe.config
+C:\Users\adchau\Documents\Visual Studio 2013\Projects\TextTranslator\TextTranslator\obj\Debug\TextTranslator.exe
+C:\Users\adchau\Documents\Visual Studio 2013\Projects\TextTranslator\TextTranslator\obj\Debug\TextTranslator.pdb
+C:\Users\adchau\Documents\Visual Studio 2013\Projects\TextTranslator\TextTranslator\bin\Debug\TextTranslator.exe
+C:\Users\adchau\Documents\Visual Studio 2013\Projects\TextTranslator\TextTranslator\bin\Debug\TextTranslator.pdb
+C:\Users\adchau\Documents\Visual Studio 2013\Projects\TextTranslator\TextTranslator\bin\Debug\System.Net.Http.Extensions.dll
+C:\Users\adchau\Documents\Visual Studio 2013\Projects\TextTranslator\TextTranslator\bin\Debug\System.Net.Http.Primitives.dll
+C:\Users\adchau\Documents\Visual Studio 2013\Projects\TextTranslator\TextTranslator\bin\Debug\System.Net.Http.Extensions.xml
+C:\Users\adchau\Documents\Visual Studio 2013\Projects\TextTranslator\TextTranslator\bin\Debug\System.Net.Http.Primitives.xml
+C:\Users\adchau\Documents\Visual Studio 2013\Projects\TextTranslator\TextTranslator\obj\Debug\TextTranslator.csproj.App.config
+C:\Users\adchau\Documents\Visual Studio 2013\Projects\TextTranslator\TextTranslator\bin\Debug\IndicTransliterator.dll
+C:\Users\adchau\Documents\Visual Studio 2013\Projects\TextTranslator\TextTranslator\bin\Debug\TransliterationLibrary.dll
+C:\Transliterations\TextTranslator\TextTranslator\bin\Debug\TextTranslator.exe.config
+C:\Transliterations\TextTranslator\TextTranslator\obj\Debug\TextTranslator.exe
+C:\Transliterations\TextTranslator\TextTranslator\obj\Debug\TextTranslator.pdb
+C:\Transliterations\TextTranslator\TextTranslator\bin\Debug\TextTranslator.exe
+C:\Transliterations\TextTranslator\TextTranslator\bin\Debug\TextTranslator.pdb
+C:\Transliterations\TextTranslator\TextTranslator\bin\Debug\IndicTransliterator.dll
+C:\Transliterations\TextTranslator\TextTranslator\bin\Debug\Newtonsoft.Json.dll
+C:\Transliterations\TextTranslator\TextTranslator\bin\Debug\System.Net.Http.Extensions.dll
+C:\Transliterations\TextTranslator\TextTranslator\bin\Debug\System.Net.Http.Primitives.dll
+C:\Transliterations\TextTranslator\TextTranslator\bin\Debug\TransliterationLibrary.dll
+C:\Transliterations\TextTranslator\TextTranslator\bin\Debug\System.Net.Http.Extensions.xml
+C:\Transliterations\TextTranslator\TextTranslator\bin\Debug\System.Net.Http.Primitives.xml
+C:\Transliterations\TextTranslator\TextTranslator\obj\Debug\TextTranslator.csproj.App.config
+C:\Transliterations\TextTranslator\TextTranslator\obj\Debug\TextTranslator.csprojResolveAssemblyReference.cache
+C:\CodeMixing\Transliterations\TextTranslator\TextTranslator\bin\Debug\TextTranslator.exe.config
+C:\CodeMixing\Transliterations\TextTranslator\TextTranslator\obj\Debug\TextTranslator.exe
+C:\CodeMixing\Transliterations\TextTranslator\TextTranslator\obj\Debug\TextTranslator.pdb
+C:\CodeMixing\Transliterations\TextTranslator\TextTranslator\obj\Debug\TextTranslator.csproj.App.config
+C:\CodeMixing\Transliterations\TextTranslator\TextTranslator\bin\Debug\TextTranslator.exe
+C:\CodeMixing\Transliterations\TextTranslator\TextTranslator\bin\Debug\TextTranslator.pdb
+C:\CodeMixing\Transliterations\TextTranslator\TextTranslator\bin\Debug\Newtonsoft.Json.dll
+C:\CodeMixing\Transliterations\TextTranslator\TextTranslator\bin\Debug\System.Net.Http.Extensions.dll
+C:\CodeMixing\Transliterations\TextTranslator\TextTranslator\bin\Debug\System.Net.Http.Primitives.dll
+C:\CodeMixing\Transliterations\TextTranslator\TextTranslator\bin\Debug\System.Net.Http.Extensions.xml
+C:\CodeMixing\Transliterations\TextTranslator\TextTranslator\bin\Debug\System.Net.Http.Primitives.xml
+C:\CodeMixing\Transliterations\TextTranslator\TextTranslator\obj\Debug\TextTranslator.csprojResolveAssemblyReference.cache
