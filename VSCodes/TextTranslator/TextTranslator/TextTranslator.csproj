@@ -35,7 +35,7 @@
   <ItemGroup>
     <Reference Include="IndicTransliterator, Version=1.0.12.2013, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Program Files\Microsoft Indic Language Input Tool\Library\IndicTransliterator.dll</HintPath>
+      <HintPath>D:\codeMix\From Sandeep\IndicTransliterator.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -60,7 +60,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="TransliterationLibrary, Version=1.0.12.2013, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Program Files\Microsoft Indic Language Input Tool\Library\TransliterationLibrary.dll</HintPath>
+      <HintPath>D:\codeMix\From Sandeep\TransliterationLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -12,15 +12,46 @@ namespace TextTranslator
 {
     class SpellerCheck
     {
-        public static void Speller()
+        public static void Speller(string[] args)
         {
-            //string FilePath = @"C:\CodeMixing\SpellerInput.tsv";
-            //string outFilePath = @"C:\CodeMixing\SpellerOutput.tsv";
-
+            string inputPath = args[1];
+            string outPath = args[2];
             string BaseURL = @"https://api.cognitive.microsoft.com/bing/v5.0/spellcheck?text={0}&mkt=en-us";
+            StreamWriter outsw = new StreamWriter(outPath);
+            
+            string[] lines = File.ReadAllLines(inputPath);
+            Console.WriteLine("Reading Input: " + inputPath);
 
-            string text = "hello why are yuo yuo fdiffernt?";
-            string URL = String.Format(BaseURL, text);
+            foreach(string line in lines)
+            {
+                string[] cols = line.Split('\t');
+                if(cols!=null && cols.Count() > 0)
+                {
+                    string question = cols[0];
+                    Console.WriteLine("Reading input question: " + question);
+
+                    string correctedQuestion = ApplySpeller(BaseURL, question);
+                    if(!String.IsNullOrEmpty(correctedQuestion))
+                    {
+                        outsw.WriteLine(correctedQuestion);
+                    }
+                }
+            }
+            Console.WriteLine("Done writing: " + outPath);
+            outsw.Close();
+            
+
+
+        }
+
+        private static string ApplySpeller(string BaseURL, string question)
+        {
+            if(String.IsNullOrEmpty(question))
+            {
+                Console.WriteLine("Question is Null or Empty");
+                return string.Empty;
+            }
+            string URL = String.Format(BaseURL, question);
 
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(URL);
             req.Method = "GET";
@@ -28,7 +59,7 @@ namespace TextTranslator
             req.Headers.Add("Retry-After", "2");
 
             try
-            {                
+            {
                 HttpWebResponse response;
                 response = (HttpWebResponse)req.GetResponse();
                 if (response != null && response.StatusCode == HttpStatusCode.OK)
@@ -42,12 +73,12 @@ namespace TextTranslator
 
                     JavaScriptSerializer json_serializer = new JavaScriptSerializer();
                     ParseSpellerClass responseDetail = json_serializer.Deserialize<ParseSpellerClass>(responseFromServer);
-                    string corrected = text;
-                    if(validateResponse(responseDetail))
+                    string corrected = question;
+                    if (validateResponse(responseDetail))
                     {
-                        foreach(var entry in responseDetail.flaggedTokens)
+                        foreach (var entry in responseDetail.flaggedTokens)
                         {
-                            if(entry.suggestions!=null && entry.suggestions.Count() > 0 && !String.IsNullOrEmpty(entry.token))
+                            if (entry.suggestions != null && entry.suggestions.Count() > 0 && !String.IsNullOrEmpty(entry.token))
                             {
                                 var correctedSuggestion = entry.suggestions.Where(s => s.score > 0.7).FirstOrDefault();
                                 if (!String.IsNullOrEmpty(correctedSuggestion.suggestion))
@@ -58,14 +89,14 @@ namespace TextTranslator
                         }
                     }
                     Console.WriteLine("Corrected string: " + corrected);
+                    return corrected;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine("error in request " + e.Message);
             }
-
-
+            return string.Empty;
         }
 
         private static bool validateResponse(ParseSpellerClass response)

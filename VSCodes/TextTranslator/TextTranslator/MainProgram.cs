@@ -31,9 +31,9 @@ namespace TextTranslator
             {
                 String Name = Transliterate.GetInstance().ToEnglish("भारत की राजधानी कहां हैं?", "hi-IN");
             }
-            else if(args[0] == "Speller")
+            else if(args.Count() == 3 && args[0] == "Speller")
             {
-                SpellerCheck.Speller();
+                SpellerCheck.Speller(args);
             }
         }
     }
