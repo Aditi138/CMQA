@@ -49,3 +49,4 @@ C:\CodeMixing\Transliterations\TextTranslator\TextTranslator\bin\Debug\System.Ne
 C:\CodeMixing\Transliterations\TextTranslator\TextTranslator\bin\Debug\System.Net.Http.Extensions.xml
 C:\CodeMixing\Transliterations\TextTranslator\TextTranslator\bin\Debug\System.Net.Http.Primitives.xml
 C:\CodeMixing\Transliterations\TextTranslator\TextTranslator\obj\Debug\TextTranslator.csprojResolveAssemblyReference.cache
+C:\Users\adchau\Documents\Visual Studio 2013\Projects\TextTranslator\TextTranslator\obj\Debug\TextTranslator.csprojResolveAssemblyReference.cache
