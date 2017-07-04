@@ -58,7 +58,7 @@ def load_data_and_labels_evaluation(positive_data_file):
     # Generate labels
     y = [[0, 1] for _ in positive_examples]
     #y = np.concatenate([positive_labels, negative_labels], 0)
-    return [x_text, y]
+    return x_text
 	
 def load_data(positive_data_file, negative_data_file):
     """

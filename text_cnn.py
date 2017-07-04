@@ -1,5 +1,6 @@
 import tensorflow as tf
 import numpy as np
+import lutorpy as lua
 
 
 class TextCNN(object):
@@ -55,15 +56,16 @@ class TextCNN(object):
         self.h_pool_flat_Q = tf.reshape(self.h_pool_Q, [-1, num_filters_total])
         self.h_pool_A = tf.concat(pooled_outputs_A, 3)
         self.h_pool_flat_A = tf.reshape(self.h_pool_A, [-1, num_filters_total])
-        self.h_pool_flat= tf.concat((self.h_pool_flat_Q,self.h_pool_flat_A),-1)
+        #self.h_pool_flat= tf.concat((self.h_pool_flat_Q,self.h_pool_flat_A),-1)
         #self.h_pool_flattend =tf.transpose(tf.matmul(tf.transpose(self.h_pool_flat), self.inputLines))
         #print self.h_pool_flattend.get_shape()
 		
-        self.fc1 = tf.layers.dense(inputs=self.h_pool_flat, units=2*num_filters_total, activation=tf.nn.relu)
+        self.fcQ = tf.layers.dense(inputs=self.h_pool_flat_Q, units=2*num_filters_total, activation=tf.nn.relu)
+        self.fcA = tf.layers.dense(inputs=self.h_pool_flat_A, units=2*num_filters_total, activation=tf.nn.relu)
         
         # Add dropout
         with tf.name_scope("dropout"):
-            self.h_drop = tf.nn.dropout(self.fc1, self.dropout_keep_prob)
+            self.h_drop = tf.nn.dropout(self.fcQ, self.dropout_keep_prob)
 
         # Final (unnormalized) scores and predictions
         with tf.name_scope("output"):
@@ -81,7 +83,7 @@ class TextCNN(object):
         with tf.name_scope("loss"):
             losses = tf.nn.softmax_cross_entropy_with_logits(logits=self.scores, labels=self.input_y)
             self.loss = tf.reduce_mean(losses) + l2_reg_lambda * l2_loss
-
+			
         # Accuracy
         with tf.name_scope("accuracy"):
             correct_predictions = tf.equal(self.predictions, tf.argmax(self.input_y, 1))

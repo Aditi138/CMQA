@@ -3,6 +3,8 @@ import os
 import numpy as np
 from gensim.models import Word2Vec
 import re
+import lutorpy as lua
+import h5py
 
 QuestionWordLenght =15
 WordVectorLength=300
@@ -38,21 +40,21 @@ def MakeQuestionVectors(question,model):
 	QuestionVector = np.empty([QuestionWordLenght,WordVectorLength])
 	wordCount=0
 	question = question.replace('\n','').replace('\r','').strip()
-	print question
+	#print question
 	words = question.split(" ")
 	lenWords = len(words)
 	if(lenWords > QuestionWordLenght):
 		print "Length of words in the question exceed max length of " +str(QuestionWordLenght)
 	if(lenWords <= QuestionWordLenght):
 		RemainingWordsToFill = QuestionWordLenght - lenWords
-		print "Appendind Zero Vector for making the predcate length to" + str(QuestionWordLenght)
+		#print "Appendind Zero Vector for making the predcate length to" + str(QuestionWordLenght)
 		for i in range(lenWords,QuestionWordLenght):
 			question = question + " <PAD>"
 		words = question.split(" ")
 		for word in words:
 			if word.count("@") >1:
 				formattedWord = word.replace("@","").replace(";","").strip()
-				print "Doing wiki2vec: " + formattedWord
+				#print "Doing wiki2vec: " + formattedWord
 				if(formattedWord.find("<PAD>")!=-1):
 					QuestionVector[wordCount] = InitializeRandomVector()
 				else:
@@ -64,41 +66,41 @@ def MakeQuestionVectors(question,model):
 						if vector is not None:
 							QuestionVector[wordCount] = vector
 					except Exception:
-						print "Exception in wiki2vec in MakeQuestionVectors function: " + inputToWiki
+						#print "Exception in wiki2vec in MakeQuestionVectors function: " + inputToWiki
 						QuestionVector[wordCount]=InitializeRandomVector()
 			else:
 				if(word.find("<PAD>")!=-1):
 					QuestionVector[wordCount]=InitializeRandomVector()
 				else:
 					try:
-						print "Doing a word2vec: " + word
+						#print "Doing a word2vec: " + word
 						vector =model[word.lower()]
 						QuestionVector[wordCount] = vector
 					except Exception:
-						print "Exception in word2vec in MakeQuestionVectors function: " + word
+						#print "Exception in word2vec in MakeQuestionVectors function: " + word
 						QuestionVector[wordCount]=InitializeRandomVector()
 			wordCount = wordCount+1
 	return QuestionVector;
 
 def MakeEntityVectors(entity,model):
 	EntityVector = np.empty([WordVectorLength])
-	print "Making vectors for entities for entity " + entity
+	#print "Making vectors for entities for entity " + entity
 	Entity="DBPEDIA_ID/"+entity
 	try:
 		EntityVector =model[Entity]
 		if EntityVector is None:
 			EntityVector=model[entity.lower().replace("_","")]
 	except Exception:
-		print "Exception in MakeEntityVectors function: " + entity
+		#print "Exception in MakeEntityVectors function: " + entity
 		EntityVector = InitializeRandomVector()
 	return EntityVector;
 
 def MakeObjectVectors(object,WikiEntity,model):
 	ObjectVector = np.empty([WordVectorLength])
 	if(is_number(object)):
-		print "Is Number so not making vectors"
+		#print "Is Number so not making vectors"
 		ObjectVector = InitializeRandomVector()
-	print "Making Object Vectors for object " + object
+	#print "Making Object Vectors for object " + object
 	WikiEntitiesSplit=WikiEntity.split(";")
 	if not WikiEntitiesSplit:
 		print "Doesn't have WikiEntity from TagMe"
@@ -109,7 +111,7 @@ def MakeObjectVectors(object,WikiEntity,model):
 			if ObjectVector is None and len(WikiEntitiesSplit) > 1:
 				ObjectVector=model["DBPEDIA_ID/"+WikiEntitiesSplit[1]]
 		except Exception:
-			print "Exception in ObjectVector: "+ WikiEntitiesSplit[0]
+			#print "Exception in ObjectVector: "+ WikiEntitiesSplit[0]
 			ObjectVector = InitializeRandomVector()
 	return ObjectVector
 
@@ -123,19 +125,19 @@ def MakePredicateVectors(predicate,model):
 		print "Length of words in the predicate exceed max length of" + str(PredicateWordLength)
 	if(lenWords <= PredicateWordLength):
 		RemainingWordsToFill = PredicateWordLength - lenWords
-		print "Appendind <PAD> for making the predcate length to "+ str(PredicateWordLength)
+		#print "Appendind <PAD> for making the predcate length to "+ str(PredicateWordLength)
 		for i in range(lenWords,PredicateWordLength):
 			predicate = predicate + " <PAD>"
 		words = predicate.split(" ")
 		for word in words:
 			formattedWord = word.lower()
-			print "Doing word2vec: " + formattedWord
+			#print "Doing word2vec: " + formattedWord
 			if(formattedWord.find("<pad>")!=-1):
 				PredicateVector[wordCount]= InitializeRandomVector()
 			try:
 				PredicateVector[wordCount] =model[formattedWord]
 			except Exception:
-				print "Exception in word2vec in MakePredicateVectors function: " + predicate
+				#print "Exception in word2vec in MakePredicateVectors function: " + predicate
 				PredicateVector[wordCount]= InitializeRandomVector()
 			wordCount = wordCount+1
 	return PredicateVector;
@@ -150,11 +152,10 @@ def is_number(var):
 		return False
 
 def loadData(inputdata,y):
-	outputfile = open("./QAEmbeddings.tsv","w")
 	labelsfile = open("./labels.tsv","w")
 	modelPath = os.path.join("/mnt/c/Wiki2vec/output16_6/","model.w2c")
 	model = Word2Vec.load(modelPath)
-	print "Making Vectors for Input data..."
+	#print "Making Vectors for Input data..."
 	linenumber = 0
 	np.set_printoptions(threshold=np.inf)
 	
@@ -176,16 +177,58 @@ def loadData(inputdata,y):
 				ObjectVector = ObjectVector.reshape(ObjectWordLength,WordVectorLength)
 				vecs.VectorsForQuestions[linenumber] = QuestionVector
 				vecs.VectorsForAnswers[linenumber] = np.concatenate((EntityVector,ObjectVector,PredicateVector),axis=0)
-				OneArray = np.concatenate((QuestionVector,EntityVector,ObjectVector,PredicateVector),axis=0)
-				print OneArray.shape
-				outputfile.write(str(OneArray)+"\n")
-                labelsfile.write(str(y[linenumber])+"\n")	
-                print "Writing to file: " + str(linenumber)
+				#print "Writing to file: " + str(linenumber)
                 linenumber=linenumber +1	
 			#else:
 			#	print "Some vector was null"
         else:
             print "Number of columns exceed"
-	outputfile.close();
+	
+	Array = np.concatenate((vecs.VectorsForQuestions, vecs.VectorsForAnswers), axis=1)
+	np.save('/mnt/c/CodeMixed/CNN/TorchCNN/QAEmbeddings.npy', Array)
+	
+	Lables = np.array(y)
+	
+	np.save('/mnt/c/CodeMixed/CNN/TorchCNN/labels.npy',Lables)
+                
+	#outputfile.close();
 	labelsfile.close()
 	return vecs.VectorsForQuestions,vecs.VectorsForAnswers
+	
+def load_Question_Embeddings(inputdata,model):
+	#print "Making Vectors for Question data..."
+	linenumber = 0
+	vecs = Vectors(len(inputdata))
+	for line in inputdata:
+		print line
+		wordCount = 0
+		line = line.rstrip("\n").rstrip("\r")
+		cols = line.split("\t")
+		if(len(cols)<2):
+			print "Number of columns invalid in the line"
+		elif(len(cols)==2):
+			QuestionVector = MakeQuestionVectors(cols[1],model)		
+			if QuestionVector is not None:
+				vecs.VectorsForQuestions[linenumber] = QuestionVector
+				#print "Writing to file: " + str(linenumber)
+                linenumber=linenumber +1	
+        else:
+            print "Number of columns exceed"
+	
+	return vecs.VectorsForQuestions
+	
+def load_Answer_Embeddings(Entity,Object,Predicate,DbPediaEntity, DbpediaObject,model):
+	#print "Making Vectors for SPO data..."
+	linenumber = 0
+	EntityVector= MakeEntityVectors(DbPediaEntity,model) # passing DBPedia Subject
+	ObjectVector= MakeObjectVectors(Object,DbpediaObject,model) # passing object and dbpedia object
+	PredicateVector = MakePredicateVectors(Predicate,model)
+	if EntityVector is not None and ObjectVector is not None and PredicateVector is not None:
+		EntityVector = EntityVector.reshape(EntityWordLength,WordVectorLength)
+		ObjectVector = ObjectVector.reshape(ObjectWordLength,WordVectorLength)
+		return np.concatenate((EntityVector,ObjectVector,PredicateVector),axis=0)
+
+def loadModel():
+	modelPath = os.path.join("/mnt/c/Wiki2vec/output16_6/","model.w2c")
+	model = Word2Vec.load(modelPath)
+	return model
