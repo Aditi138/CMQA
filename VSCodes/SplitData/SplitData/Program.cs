@@ -11,30 +11,38 @@ namespace SplitData
     {
         static void Main(string[] args)
         {
-            string[] lines = File.ReadAllLines(@"C:\CodeMixed\CNN\cnn-text-classification-tf\data\WrongPredictedTripletQuestion_All.tsv");
+            //string[] lines = File.ReadAllLines(@"C:\CodeMixed\CNN\cnn-text-classification-tf\data\WrongPredictedTripletQuestion_All.tsv");
             int Total = 0;
             int fileNumber = 0;
             string file = @"C:\CodeMixed\CNN\cnn-text-classification-tf\data\NegativeFiles\WrongData_{0}.tsv";
 
-            while (Total < lines.Length)
+            //while (Total < lines.Length)
+            int count = 0;
+            string fileName = String.Format(file, fileNumber);
+            StreamWriter catsw = new StreamWriter(fileName);
+                    
+            using (StreamReader reader = new StreamReader(@"C:\CodeMixed\CNN\cnn-text-classification-tf\data\WrongPredictedTripletQuestion_All.tsv"))
             {
-                string fileName = String.Format(file, fileNumber);
-                StreamWriter catsw = new StreamWriter(fileName);
-                int count = 0;
-                string[] tempLines = Populatelines(lines, Total);
-                fileNumber = fileNumber + 1;
-                if (tempLines != null)
+                string line = "";
+                
+                while ((line = reader.ReadLine()) != null)
                 {
-                    foreach (string line in tempLines)
+                    if(count < 10000)
                     {
-                        //string newLine = ModfiedLine(line);
                         catsw.WriteLine(line);
                         count = count + 1;
                     }
-                    Console.WriteLine("Done FileName :" + fileName + "Count : " + tempLines.Length);
+                    else
+                    {
+                        Console.WriteLine("Done FileName :" + fileName + "Count : " + count);
+                        count = 0;
+                        fileNumber = fileNumber + 1;
+                        fileName = String.Format(file, fileNumber);
+                        catsw.Close();
+                        catsw = new StreamWriter(fileName);
+                        
+                    }
                 }
-                Total = Total + count;
-                catsw.Close();
             }
         }
 
