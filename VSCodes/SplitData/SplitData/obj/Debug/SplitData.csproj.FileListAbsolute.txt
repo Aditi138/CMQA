@@ -1,0 +1,6 @@
+c:\users\adchau\documents\visual studio 2013\Projects\SplitData\SplitData\bin\Debug\SplitData.exe.config
+c:\users\adchau\documents\visual studio 2013\Projects\SplitData\SplitData\bin\Debug\SplitData.exe
+c:\users\adchau\documents\visual studio 2013\Projects\SplitData\SplitData\bin\Debug\SplitData.pdb
+c:\users\adchau\documents\visual studio 2013\Projects\SplitData\SplitData\obj\Debug\SplitData.csprojResolveAssemblyReference.cache
+c:\users\adchau\documents\visual studio 2013\Projects\SplitData\SplitData\obj\Debug\SplitData.exe
+c:\users\adchau\documents\visual studio 2013\Projects\SplitData\SplitData\obj\Debug\SplitData.pdb
