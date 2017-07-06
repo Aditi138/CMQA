@@ -151,14 +151,12 @@ def is_number(var):
 	except Exception:
 		return False
 
-def loadData(inputdata,y):
-	labelsfile = open("./labels.tsv","w")
-	modelPath = os.path.join("/mnt/c/Wiki2vec/output16_6/","model.w2c")
-	model = Word2Vec.load(modelPath)
+def loadData(inputdata,y,i,model):
+	#modelPath = os.path.join("/mnt/c/Wiki2vec/output16_6/","model.w2c")
+	#model = Word2Vec.load(modelPath)
 	#print "Making Vectors for Input data..."
 	linenumber = 0
-	np.set_printoptions(threshold=np.inf)
-	
+	#np.set_printoptions(threshold=np.inf)
 	#NumberOfLines = sum(1 for line in inputfile)
 	vecs = Vectors(len(inputdata))
 	for line in inputdata:
@@ -177,6 +175,8 @@ def loadData(inputdata,y):
 				ObjectVector = ObjectVector.reshape(ObjectWordLength,WordVectorLength)
 				vecs.VectorsForQuestions[linenumber] = QuestionVector
 				vecs.VectorsForAnswers[linenumber] = np.concatenate((EntityVector,ObjectVector,PredicateVector),axis=0)
+				#arr = np.concatenate((vecs.VectorsForQuestions, vecs.VectorsForAnswers), axis=1)
+				#np.save(f_handle, arr)
 				#print "Writing to file: " + str(linenumber)
                 linenumber=linenumber +1	
 			#else:
@@ -185,14 +185,15 @@ def loadData(inputdata,y):
             print "Number of columns exceed"
 	
 	Array = np.concatenate((vecs.VectorsForQuestions, vecs.VectorsForAnswers), axis=1)
-	np.save('/mnt/c/CodeMixed/CNN/TorchCNN/QAEmbeddings.npy', Array)
-	
+	outputfilename = '/mnt/d/NegativeFilesEmb/QAEmbeddings_' + str(i) + ".npy"
+	np.save(outputfilename, Array)
+	#f_handle.close()
 	Lables = np.array(y)
-	
-	np.save('/mnt/c/CodeMixed/CNN/TorchCNN/labels.npy',Lables)
+	lablesfilename = '/mnt/d/NegativeFilesLabels/labels_' + str(i) + ".npy"
+	np.save(lablesfilename,Lables)
                 
 	#outputfile.close();
-	labelsfile.close()
+	#labelsfile.close()
 	return vecs.VectorsForQuestions,vecs.VectorsForAnswers
 	
 def load_Question_Embeddings(inputdata,model):
